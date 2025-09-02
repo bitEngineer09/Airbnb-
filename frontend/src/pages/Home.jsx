@@ -4,13 +4,15 @@ import { authDataContext } from '../context/authContext';
 import Nav from '../components/NavComponents/Nav';
 import Login from '../pages/AuthPages/Login';
 import Listings from '../components/ListingPageComponents/Listings';
+import FooterPrimary from '../components/Footer/FooterPrimary';
+import FooterSecondary from '../components/Footer/FooterSecondary';
 
 const Home = () => {
 
 
     // CONTEXT DATA
     const { filteredListings } = useContext(listingDataContext);
-    const {showLogin, setShowLogin, showSingup, setShowSignup} = useContext(authDataContext);
+    const { showLogin, setShowLogin, showSignup, setShowSignup } = useContext(authDataContext);
 
 
 
@@ -19,7 +21,7 @@ const Home = () => {
     // console.log(filteredListings)
 
     return (
-        <>
+        <div className='relative'>
             <Nav setShowLogin={setShowLogin} />
 
             {/* SHOW LOGIN POP UP FUNCTIONALITY */}
@@ -39,7 +41,7 @@ const Home = () => {
 
 
             {/* LISTINGS ON HOME PAGE */}
-            <div className='w-[160rem] mx-auto'>
+            <div className='w-full min-h-[150rem] px-[2rem]'>
                 <div className='w-full text-[3rem] font-semibold px-[3rem] mt-[2rem]'>
                     {
                         filteredListings.length > 0
@@ -49,28 +51,47 @@ const Home = () => {
                     }
                 </div>
 
+
                 {/* LISTINGS CONTAINER */}
-                <div className='grid grid-cols-5 items-center justify-items-center gap-y-[3rem] w-full py-[3rem] '>
+                <div className='grid grid-cols-6 items-center justify-items-center gap-y-[3rem] w-full py-[3rem] '>
                     {
                         filteredListings.length > 0
                             ? filteredListings.map((item) => {
                                 const { _id, title, rent, city, landmark, image1 } = item;
                                 return (
-                                    <Listings key={_id} id={_id} title={title} rent={rent} city={city} landmark={landmark} image={image1} />
+                                    <Listings
+                                        key={_id}
+                                        id={_id}
+                                        title={title}
+                                        rent={rent}
+                                        city={city}
+                                        landmark={landmark}
+                                        image={image1}
+                                    />
                                 )
                             })
-                            : <p
+                            : <div
                                 className='
-                                    text-[3rem] text-red-700 font-semibold
-                                    absolute
-                                '>OOPS ! No Listings Available For This Category
-                                <br />
-                            </p>
+                  noListingDiv
+                  w-full min-h-[calc(100vh-20rem)]
+                  flex flex-col items-center justify-center
+                  text-[4rem] font-semibold text-zinc-400
+                  absolute top-[19rem]
+              '>
+                                <p>Oops! No listing availiable for this category</p>
+                                <span>{" :("}</span>
+                            </div>
 
                     }
                 </div>
+
+                {/* FOOTER SECTION */}
+                <div className='w-full px-[5rem] bg-[#F7F7F7] absolute bottom-0'>
+                    <FooterPrimary />
+                    <FooterSecondary />
+                </div>
             </div>
-        </>
+        </div>
     )
 }
 

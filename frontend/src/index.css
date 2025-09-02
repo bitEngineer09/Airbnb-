@@ -24,3 +24,23 @@ body {
 .priceInfoTag {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+.bookingDetails {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.rdrCalendarWrapper {
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.datePicker {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.profile {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+

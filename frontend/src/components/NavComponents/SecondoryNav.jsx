@@ -55,8 +55,8 @@ const SecondoryNav = () => {
                     className="
                         navSearch
                         relative
-                        ml-[4rem]
-                        w-[50%] h-[80%]
+                        ml-[10rem]
+                        w-[45%] h-[80%]
                         flex items-cetner
                     ">
                     <input
@@ -90,7 +90,7 @@ const SecondoryNav = () => {
                         navLeftSection
                         flex items-center justify-end
                         gap-[2rem]
-                        w-[24%] h-[100%]
+                        w-[25%] h-[100%]
                     ">
                     <p
                         onClick={() => navigate('/listingpage1')}

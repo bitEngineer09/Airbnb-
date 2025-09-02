@@ -4,7 +4,7 @@ import { listingDataContext } from '../../context/ListingContext';
 import { useNavigate } from 'react-router-dom';
 import { GoHeartFill } from "react-icons/go";
 
-const Listings = ({ id, title, rent, city, landmark, image }) => {
+const EditListingCard = ({ id, title, rent, city, landmark, image }) => {
 
     // CONTEXT DATA
     const { handleSingleCardData } = useContext(listingDataContext);
@@ -16,7 +16,7 @@ const Listings = ({ id, title, rent, city, landmark, image }) => {
         <div
             onClick={() => {
                 handleSingleCardData(id);
-                navigate(`/viewcard/${id}`);
+                navigate(`/editviewcard/${id}`);
             }}
             className='
             w-[26rem]
@@ -32,7 +32,14 @@ const Listings = ({ id, title, rent, city, landmark, image }) => {
                         rounded-[2rem]
                         object-cover
                     '/>
-            
+                {/* <img
+                    src={heart}
+                    alt=""
+                    className='
+                        w-[2.8rem]
+                        absolute top-[1.6rem] right-[1.6rem]
+                        hover:scale-115 hover:ease-in duration-80
+                    '/> */}
                 <GoHeartFill className='
                         text-[2.5rem] text-rose-500
                         absolute top-[1.6rem] right-[1.6rem]
@@ -53,4 +60,4 @@ const Listings = ({ id, title, rent, city, landmark, image }) => {
     )
 }
 
-export default Listings;
+export default EditListingCard;

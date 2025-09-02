@@ -59,6 +59,7 @@ const NavSecondary = () => {
                             h-[8rem] w-[10rem]
                             rounded-[1rem]
                             text-nowrap
+                             ${selectedCategory === item.value ? "bg-zinc-200" : "hover:bg-zinc-200"}
                         `}
                 >
                     {item.icon}

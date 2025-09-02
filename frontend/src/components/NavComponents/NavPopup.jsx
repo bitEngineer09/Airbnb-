@@ -7,6 +7,7 @@ import { useRef } from 'react';
 
 const NavPopup = ({ setShowLogin, setShowPopup }) => {
 
+
     // USE REF
     const popupRef = useRef(null);
 
@@ -42,7 +43,7 @@ const NavPopup = ({ setShowLogin, setShowPopup }) => {
 
     return (
         <>
-            <ul 
+            <ul
                 ref={popupRef}
                 className='
                     flex
@@ -66,6 +67,7 @@ const NavPopup = ({ setShowLogin, setShowPopup }) => {
                 </li>
 
                 <li
+                    onClick={() => navigate(`/mylistingpage/${currentUser.id}`)}
                     className='
                         cursor-pointer
                         p-[1rem]

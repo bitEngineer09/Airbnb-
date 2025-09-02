@@ -4,7 +4,9 @@ import {
     addListingToUser,
     createNewListing,
     deleteListingById,
+    findListingByHost,
     findListingById,
+    findUserByHostId,
     updateListingById
 } from "../services/listing.services.js";
 
@@ -77,7 +79,7 @@ export const deleteListing = async (req, res) => {
         const removeListing = await deleteListingById(id);
         if (!removeListing) return res.status(500).json({ message: "Internal Server Error" });
 
-        return res.status(200).json({message: `Listing is removed with id ${id}`});
+        return res.status(200).json({ message: `Listing is removed with id ${id}` });
 
     } catch (error) {
         console.log("delete listing controller error: ", error);
@@ -90,10 +92,10 @@ export const deleteListing = async (req, res) => {
 export const getAllListing = async (req, res) => {
     try {
         const listings = await Listing.find({});
-        return res.status(200).json({success: true, data: listings})
+        return res.status(200).json({ success: true, data: listings })
 
     } catch (error) {
-        return res.status(400).json({success: false, message: `get all listing error: ${error}`});
+        return res.status(400).json({ success: false, message: `get all listing error: ${error}` });
     }
 }
 
@@ -101,12 +103,52 @@ export const getAllListing = async (req, res) => {
 // GET LISTING BY ID
 export const getListingById = async (req, res) => {
     try {
-        if (!req.user) return res.status(400).json({success: false, message: "User not authenticated"});
+        // if (!req.user) return res.status(400).json({success: false, message: "User not authenticated"});
 
-        const {id} = req.params;
+        const { id } = req.params;
         const singleList = await findListingById(id);
         return res.status(200).json(singleList);
     } catch (error) {
-        return res.status(400).json({success: false, message: `get listing by id error: ${error}`});
+        return res.status(400).json({ success: false, message: `get listing by id error: ${error}` });
+    }
+}
+
+
+// GET LISTING BY HOST ID
+export const getListingByHostId = async (req, res) => {
+    try {
+        if (!req.user) return res.status(400).json({ success: false, message: "User not authenticated" });
+
+        const { hostId } = req.params;
+        const listings = await findListingByHost(hostId);
+        if (!listings) return res.status(400).json({ success: false, message: "No Listings found" });
+
+        return res.status(200).json(listings);
+
+    } catch (error) {
+        console.log("getListingByHostId error: ", error);
+        return res.status(400).json({ success: false, message: `get listing by host id error: ${error}` });
+    }
+}
+
+
+
+// GET USER BY HOST ID
+export const getUserByHostId = async (req, res) => {
+    try {
+        if (!req.user) return res.status(400).json({success: false, message: "User not authenticated"});
+
+        const {hostId} = req.params;
+        console.log("hostId received:", hostId);
+        if (!hostId) return res.status(400).json({success: false, message: "host id is missing"})
+
+        const user = await findUserByHostId(hostId);
+        if (!user) return res.status(400).json({success: false, message: "User not found"});
+
+        return res.status(200).json({success: true, user: user});
+
+    } catch (error) {
+        console.log("getUserByHostId error: ", error);
+        return res.status(400).json({success: false, message: error});
     }
 }

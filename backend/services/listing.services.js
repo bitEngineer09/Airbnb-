@@ -12,7 +12,7 @@ export const createNewListing = async ({ host, title, description, rent, city, l
         landmark,
         category,
         image1,
-        image2,
+        image2, 
         image3
     });
 }
@@ -53,7 +53,7 @@ export const deleteListingById = async (id) => {
 
 
 // GET LISTING BY HOST ID
-export const getListingByHost = async (hostId) => {
+export const findListingByHost = async (hostId) => {
     return await Listing.find({host: hostId});
 }
 
@@ -61,4 +61,10 @@ export const getListingByHost = async (hostId) => {
 // GET LISTING BY ITS ID
 export const findListingById = async (id) => {
     return await Listing.findById(id);
+}
+
+
+// FIND USER BY HOST ID
+export const findUserByHostId = async(hostId) => {
+    return await User.findById(hostId, {password: 0});
 }
