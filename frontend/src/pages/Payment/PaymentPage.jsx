@@ -7,6 +7,7 @@ import { listingDataContext } from '../../context/ListingContext';
 // import { useLocation } from 'react-router-dom';
 import PriceBreakdown from '../../components/PopUp/PriceBreakdown';
 import PhoneNumber from '../../components/PopUp/PhoneNumber';
+import { toast } from 'react-toastify';
 
 
 const PaymentPage = () => {
@@ -25,10 +26,17 @@ const PaymentPage = () => {
     const {
         handleSingleCardData,
         singleCardData,
-        setSingleCardData
+        setSingleCardData,
     } = useContext(listingDataContext);
 
-
+    // HANDLE CONFIRM PAYMENT
+    const handleConfirm = () => {
+        toast.success("💞 Booking Confirmed", {
+            position: "top-center",
+            autoClose: 3000,
+            className: "text-[2rem] font-semibold"
+        });
+    };
 
     // USE LOCATION
     const location = useLocation();
@@ -58,6 +66,10 @@ const PaymentPage = () => {
     const convertedCheckOutDate = new Date(checkOutDate).toLocaleDateString();
     const newDate2 = new Date(convertedCheckOutDate);
 
+
+    const hostId = singleCardData?.host;
+    // console.log(singleCardData)
+    console.log(hostId);
 
     // NAVIGATE
     const navigate = useNavigate();
@@ -99,6 +111,20 @@ const PaymentPage = () => {
     }, [id]);
 
 
+    // useEffect(() => {
+    //     const fetchUserDetailsByhostId = async (hostId) => {
+    //         try {
+    //             const response = await handleUserByHostId(hostId);
+    //             setUserDetails(response);
+    //             console.log(response);
+    //         } catch (error) {
+    //             console.log("Error fetching user details by hostId: ", error);
+    //         }
+    //     }
+    //     fetchUserDetailsByhostId(hostId);
+    // }, [hostId]);
+
+   
 
     return (
         <div className='w-full min-h-screen'>
@@ -283,6 +309,10 @@ const PaymentPage = () => {
 
                         {/* CONFIRM AND PAY */}
                         <button
+                            onClick={() => {
+                                handleConfirm();
+                                // navigate('/');
+                            }}
                             className='
                                     w-[27rem] h-[6.5rem]
                                     text-[2.4rem] font-medium

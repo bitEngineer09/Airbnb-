@@ -4,6 +4,7 @@ import { Ring2 } from 'ldrs/react'
 import 'ldrs/react/Ring2.css'
 import { listingDataContext } from '../../context/ListingContext';
 import ListingPageNav from '../../components/ListingPageComponents/ListingPageNav';
+import { toast } from 'react-toastify';
 
 const ListingPage4 = () => {
 
@@ -16,6 +17,13 @@ const ListingPage4 = () => {
         handleAddListing
     } = useContext(listingDataContext);
 
+    const handleAddToast = () => {
+        toast.success("Listing added", {
+            position: "top-center",
+            autoClose: 3000,
+            className: "font-semibold, text-[2rem]"
+        })
+    }
 
     // NAVIGATE
     const navigate = useNavigate();
@@ -89,6 +97,7 @@ const ListingPage4 = () => {
                         setLoading(true);
                         try {
                             await handleAddListing();
+                            handleAddToast()
                             navigate('/');
                         } catch (error) {
                             console.error("Failed to add listing:", error);

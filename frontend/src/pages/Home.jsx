@@ -39,7 +39,6 @@ const Home = () => {
                 )
             }
 
-
             {/* LISTINGS ON HOME PAGE */}
             <div className='w-full min-h-[150rem] px-[2rem]'>
                 <div className='w-full text-[3rem] font-semibold px-[3rem] mt-[2rem]'>

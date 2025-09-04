@@ -22,6 +22,7 @@ import EditViewCard from './pages/CardPages/EditViewCard'
 import PaymentPage from './pages/Payment/PaymentPage'
 
 import ScrollToTop from './helpers/ScrollToTop'
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
 
@@ -53,6 +54,15 @@ const App = () => {
 
         <Route path="/paymentpage/:id" element={<PaymentPage />} />
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        theme="dark"                // light | dark | colored
+        toastClassName="bg-rose-500 text-white text-lg rounded-lg shadow-xl"
+        bodyClassName="font-medium"
+        progressClassName="bg-white"
+      />
+
     </>
 
 
